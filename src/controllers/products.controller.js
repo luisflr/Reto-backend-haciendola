@@ -5,11 +5,13 @@ const Product = ProductModel(sequelize)
 
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({ order: [
+      ['id', 'ASC'],
+  ],});
 
     res.status(201).json({ message: 'Products found', products });
   } catch (error) {
-    console.error('Error registering the user:', error);
+    console.error('Error getting all products:', error);
     res.status(500).json({ message: 'Server Error' });
   }
 }
@@ -24,7 +26,7 @@ export const getProductById = async (req, res) => {
 
     res.status(201).json({ message: 'Product found', product })
   } catch (error) {
-    console.error('Error registering the user:', error);
+    console.error('Error getting the product:', error);
     res.status(500).json({ message: 'Server Error' });
   }
 }
@@ -44,7 +46,7 @@ export const createProduct = async (req, res) => {
 
     res.status(201).json({ message: 'Product created successfully', product });
   } catch (error) {
-    console.error('Error registering the user:', error);
+    console.error('Error creating the product:', error);
     res.status(500).json({ message: 'Server Error' });
   }
 }
@@ -76,7 +78,19 @@ export const updateProduct = async (req, res) => {
 
     res.status(201).json({ message: 'Product updated successfully', product })
   } catch (error) {
-    console.error('Error registering the user:', error);
+    console.error('Error udating the product:', error);
     res.status(500).json({ message: 'Server Error' });
+  }
+}
+
+export const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Product.destroy({ where: { id } })
+
+    res.status(201).json({ message: 'Product deleted successfully' })
+  } catch (error) {
+    console.error('Error deleting the product:', error);
+    res.status(500).json({ message: 'Server Error' });   
   }
 }
