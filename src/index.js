@@ -6,12 +6,12 @@ import app from './app.js';
 dotenv.config()
 
 
-export const sequelize = new Sequelize(
-  process.env.DB_NAME || 'haciendola',
-  process.env.DB_USERNAME || 'luisflr', 
-  process.env.DB_PASSWORD || 'admin', 
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USERNAME, 
+  process.env.DB_PASSWORD, 
   {
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST,
     dialect: 'postgres'
   }
 );
@@ -26,5 +26,8 @@ sequelize
 // Start server 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
+  console.log(process.env.DB_NAME,
+    process.env.DB_USERNAME, 
+    process.env.DB_PASSWORD, process.env.DB_HOST)
   console.log(`Server is running on port ${PORT}`)
 });
