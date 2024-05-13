@@ -1,7 +1,20 @@
+import dotenv from 'dotenv';
+import { Sequelize } from "sequelize";
+
 import app from './app.js';
 
-import { sequelize } from "./database/db.js";
+dotenv.config()
 
+
+export const sequelize = new Sequelize(
+  process.env.DB_NAME || 'haciendola',
+  process.env.DB_USERNAME || 'luisflr', 
+  process.env.DB_PASSWORD || 'admin', 
+  {
+    host: process.env.DB_HOST || 'localhost',
+    dialect: 'postgres'
+  }
+);
 
 sequelize
   .sync()
