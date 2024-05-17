@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { sequelize } from './database/db.js';
+import { sawggerDocs as v1SwaggerDocs } from './swagger.js';
 
 import app from './app.js';
 
@@ -15,6 +16,6 @@ sequelize
 // Start server 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  
-  console.log(`Server is running on port ${PORT}`)
+  console.log(`Server is running on port ${PORT}`);
+  v1SwaggerDocs(app, PORT);
 });

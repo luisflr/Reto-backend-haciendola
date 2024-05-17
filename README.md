@@ -32,3 +32,7 @@ Para ejecutar el proyecto se debe seguir con los siguientes pasos:
 3. Después de tener instalado los paquetes también será necesario tener instalado postgresql ya que esta fue la Base de Datos que se utilizó para la realización del proyecto. https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-20-04-es . Esta documentación tambien nos ayudará a crear un usuario para conectarnos a la base de datos.
 4. Ya teniendo instalado nuestra base de datos, podemos utilizar el archivo  **haciendola.sql** para replicarla la base de datos y esto lo conseguimos con el siguiente comando: ```pg_restore -U <username> -h localhost -p <port> -W -F t -d <database_name> haciendola.sql```
 5. Finalmente ya con la base de datos funcionando y con los paquetes instalados, nos dirigimos nuevamente a la carpeta de nuestro proyecto y ejecutamos el comando ```npm run dev```
+
+## Dcoumentación de la API
+
+Si deseas ver la documentacion de la API, solo debes agregar el `/docs` a la url

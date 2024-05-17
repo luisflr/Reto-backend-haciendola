@@ -6,6 +6,39 @@ import { sequelize } from "../database/db.js";
 
 const User = UserModel(sequelize)
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     NotFoundUser:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: User not exists
+ *     InvalidCredentials:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *           example: Invalid Credentials
+ */
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     RegisterResponse:
+ *       type: object
+ *       properties:
+ *         username:
+ *           type: string
+ *           example: usernametest
+ *         password:
+ *           type: string
+ *           example: xvasd12ad12qwe323rfzcvqwprtiqwk
+ *
+ */
 export const register = async (req, res) => {
   try {
       const { username, password } = req.body;
@@ -22,11 +55,24 @@ export const register = async (req, res) => {
     }
 }
 
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     LoginResponse:
+ *       type: object
+ *       properties:
+ *         token:
+ *           type: string
+ *           example: eyJhbGciOiJIUzI1NiIsInR5cCI6.eyJ1c2VySWQiOjIsImlhdCI6MTcxNTkwOTMzOCwiZXhwIjoxNzE1.MeAqXQpj9NUUJr6u_rLDJpgsz4LSiPTLePESl
+ *
+ */
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body
     const user = await User.findOne({ where: { username } })
-    if (!user) return res.status(400).json({ message: 'User not exists' });
+    if (!user) return res.status(404).json({ message: 'User not exists' });
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) return res.status(400).json({ message: 'Invalid Credentials' });
