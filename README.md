@@ -20,6 +20,7 @@ Para la creación del backend de este reto técnico se optó por utilizar las si
 - Express
 - Sequelize (ORM)
 - PostgreSQL
+- Swagger (Docs)
 
 Asimismo, se agregaron algunas librerías para adicionales para el encriptado de la contraseña y la autenticación JWT.
 
